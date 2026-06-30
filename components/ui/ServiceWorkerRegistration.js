@@ -3,14 +3,20 @@ import { useEffect } from 'react';
 
 export default function ServiceWorkerRegistration() {
   useEffect(() => {
-    // Unregister any stale service workers to prevent cached JS causing hydration issues
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistrations().then((registrations) => {
-        for (const registration of registrations) {
-          registration.unregister();
-        }
-      });
+    if (typeof window === 'undefined') return;
+
+    const isProduction = process.env.NODE_ENV === 'production';
+    const isSecureContext = window.location.protocol === 'https:' || window.location.hostname === 'localhost';
+
+    if (!isProduction || !isSecureContext || !('serviceWorker' in navigator)) {
+      return;
     }
+
+    navigator.serviceWorker.getRegistrations()
+      .then((registrations) => {
+        registrations.forEach((registration) => registration.unregister());
+      })
+      .catch(() => {});
   }, []);
 
   return null;
