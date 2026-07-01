@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getTags } from '@/services/devApi';
+import { getMixedTags } from '@/services/mixedApi';
 
 export const revalidate = 3600;
 
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function CategoriesPage() {
-  const tags = await getTags({ perPage: 24 });
+  const tags = await getMixedTags({ perPage: 24 });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

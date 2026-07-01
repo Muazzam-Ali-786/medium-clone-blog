@@ -1,21 +1,20 @@
 import Link from 'next/link';
-import { getArticlesByTag } from '@/services/devApi';
+import { getMixedArticlesByTag } from '@/services/mixedApi';
 
 export const revalidate = 300;
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const name = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
   return {
-    title: `${name} | MediumClone Categories`,
-    description: `Browse all articles in the ${name} category.`,
+    title: `${slug} Category | MediumClone`,
+    description: `Browse articles about ${slug}`,
   };
 }
 
 export default async function CategoryDetail({ params }) {
   const { slug } = await params;
   const categoryName = slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-  const blogs = await getArticlesByTag(slug, { perPage: 24 });
+  const blogs = await getMixedArticlesByTag(slug, { perPage: 30 });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

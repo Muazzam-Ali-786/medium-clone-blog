@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { getArticles, getTopArticles, getTags } from '@/services/devApi';
+import { getMixedArticles, getMixedTopArticles, getMixedTags } from '@/services/mixedApi';
 
 export const revalidate = 300; // revalidate every 5 minutes
 
 export default async function Home() {
   const [latestArticles, popularArticles, tags] = await Promise.all([
-    getArticles({ perPage: 6 }),
-    getTopArticles({ perPage: 4, top: 7 }),
-    getTags({ perPage: 12 }),
+    getMixedArticles({ perPage: 6 }),
+    getMixedTopArticles({ perPage: 4, top: 7 }),
+    getMixedTags({ perPage: 12 }),
   ]);
 
   return (

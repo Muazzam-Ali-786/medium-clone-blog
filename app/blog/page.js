@@ -1,5 +1,5 @@
 import BlogListingClient from './BlogListingClient';
-import { getArticles, getTags } from '@/services/devApi';
+import { getMixedArticles, getMixedTags } from '@/services/mixedApi';
 
 export const metadata = {
   title: 'Articles | MediumClone',
@@ -10,8 +10,8 @@ export const revalidate = 300;
 
 export default async function BlogListing() {
   const [blogs, tags] = await Promise.all([
-    getArticles({ perPage: 30 }), // Fetch more for listing
-    getTags({ perPage: 20 }),
+    getMixedArticles({ perPage: 30 }), // Fetch more for listing
+    getMixedTags({ perPage: 20 }),
   ]);
 
   return <BlogListingClient initialBlogs={blogs} tags={tags} />;

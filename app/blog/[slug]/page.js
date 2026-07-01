@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import PremiumWall from '@/components/blog/PremiumWall';
-import { getArticleBySlug, getArticlesByTag } from '@/services/devApi';
+import { getMixedArticleBySlug as getArticleBySlug, getMixedArticlesByTag as getArticlesByTag } from '@/services/mixedApi';
 
 export const revalidate = 300;
 
