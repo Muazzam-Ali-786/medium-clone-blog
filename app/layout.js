@@ -39,6 +39,9 @@ export const metadata = {
     images: ["https://picsum.photos/seed/og/1200/630"],
   },
   manifest: "/manifest.json",
+};
+
+export const viewport = {
   themeColor: "#4f46e5",
 };
 
@@ -49,6 +52,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-gray-50 text-gray-900">
